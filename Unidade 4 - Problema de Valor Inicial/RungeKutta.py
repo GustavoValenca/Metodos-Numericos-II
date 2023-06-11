@@ -55,3 +55,23 @@ def RungeKutta_3rd_alternative_PVI_3(PVI, s_i, delta_t, f):
     s_f = PVI_3.S(f, s_i.t + delta_t, d_v, d_y)
     return s_f
 
+def RungeKutta_4th_alternative_PVI_3(PVI, s_i, delta_t, f):
+    f1_dv, f1_dy = PVI.F(s_i)
+
+    s_2 = FE.ForwardEuler_PVI_3(PVI, s_i, delta_t / 2, 2)
+
+    f2_dv, f2_dy = PVI.F(s_2)
+
+    s_3 = FE.ForwardEuler_alternative_PVI_3(PVI, s_i, delta_t / 2, 3, f2_dv, f2_dy)
+
+    f3_dv, f3_dy = PVI.F(s_3)
+
+    s_4 = FE.ForwardEuler_alternative_PVI_3(PVI, s_i, delta_t, f, f3_dv, f3_dy)
+
+    f4_dv, f4_dy = PVI.F(s_4)
+
+    dv_f = s_i.v + (delta_t / 6) * (f1_dv + 2 * f2_dv + 2 * f3_dv + f4_dv)
+    dy_f = s_i.y + (delta_t / 6) * (f1_dy + 2 * f2_dy + 2 * f3_dy + f4_dy)
+
+    s_f = PVI_3.S(f, s_i.t + delta_t, dv_f, dy_f)
+    return s_f
