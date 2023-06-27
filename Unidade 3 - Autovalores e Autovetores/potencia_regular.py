@@ -80,7 +80,7 @@ def main():
     print(f"Autovalor dominante: {lambda1}")
     print(f"Autovetor correspondente: {x1}")
     
-    print(matriz_x_vetor(A2, x1))
+    # print(matriz_x_vetor(A2, x1))
     
 
 if __name__ == "__main__":
