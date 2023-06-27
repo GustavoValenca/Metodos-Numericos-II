@@ -2,17 +2,17 @@ import numpy as np
 
 n = int(input("N: "))
 fxy = int(input("f(x, y): "))
-print(n)
-print(fxy)
+# print(n)
+# print(fxy)
 delta = 1 / n
 
 pontos = []
 
-for x in range(1, n):
-    for y in range(1, n):
-        pontos.append((x, y))
+for y in range(1, n):
+    for x in range(1, n):
+        pontos.append((0 + x*delta, 0 + y*delta))
 
-print(pontos)
+# print(pontos)
 
 borda_inferior = 0
 borda_superior = 0
@@ -25,11 +25,11 @@ celula_inferior = 1 / (delta ** 2)
 celula_superior = 1 / (delta ** 2)
 celula_central = - 2 * ( 1 / (delta ** 2) + 1 / (delta ** 2) )
 
-print(celula_esquerda)
-print(celula_direita)
-print(celula_inferior)
-print(celula_superior)
-print(celula_central)
+# print(celula_esquerda)
+# print(celula_direita)
+# print(celula_inferior)
+# print(celula_superior)
+# print(celula_central)
 
 matriz = []
 tamanho = (n - 1) ** 2
@@ -129,5 +129,47 @@ for y in range(1, n):
 A = np.array(matriz)
 y = np.array(b)
 x = np.linalg.solve(A, y)
-print(x)
-    
+# print(x)
+
+pdf_4 = [-0.171875, -0.21875, -0.171875, -0.21875, -0.28125, -0.21875, -0.171875, -0.21875, -0.171875]
+
+def print_erro(x, y):
+    erro = (x - y) / y
+    print(f"{erro:^12.6f}|")
+
+
+print("|      x, y      |  Valor Obtido | Valor Obtido com N=4 |    Erro    |")
+print("----------------------------------------------------------------------")
+for i in range(0, len(pontos)):
+    print(f"| ({pontos[i][0]:.3f}, {pontos[i][1]:.3f}) |   {x[i]:.6f}   |", end='')
+
+    if  pontos[i][0] == 0.25 and pontos[i][1] == 0.25:
+        print(f'       {pdf_4[0]:.6f}      |', end='')
+        print_erro(x[i], pdf_4[0])
+    elif  pontos[i][0] == 0.5 and pontos[i][1] == 0.25:
+        print(f'       {pdf_4[1]:.6f}      |', end='')
+        print_erro(x[i], pdf_4[1])
+    elif  pontos[i][0] == 0.75 and pontos[i][1] == 0.25:
+        print(f'       {pdf_4[2]:.6f}      |', end='')
+        print_erro(x[i], pdf_4[2])
+    elif  pontos[i][0] == 0.25 and pontos[i][1] == 0.5:
+        print(f'       {pdf_4[3]:.6f}      |', end='')
+        print_erro(x[i], pdf_4[3])
+    elif  pontos[i][0] == 0.5 and pontos[i][1] == 0.5:
+        print(f'       {pdf_4[4]:.6f}      |', end='')
+        print_erro(x[i], pdf_4[4])
+    elif  pontos[i][0] == 0.75 and pontos[i][1] == 0.5:
+        print(f'       {pdf_4[5]:.6f}      |', end='')
+        print_erro(x[i], pdf_4[5])
+    elif  pontos[i][0] == 0.25 and pontos[i][1] == 0.75:
+        print(f'       {pdf_4[6]:.6f}      |', end='')
+        print_erro(x[i], pdf_4[6])
+    elif  pontos[i][0] == 0.5 and pontos[i][1] == 0.75:
+        print(f'       {pdf_4[7]:.6f}      |', end='')
+        print_erro(x[i], pdf_4[7])
+    elif  pontos[i][0] == 0.75 and pontos[i][1] == 0.75:
+        print(f'       {pdf_4[8]:.6f}      |', end='')
+        print_erro(x[i], pdf_4[8])
+    else:
+        print(' ' * 22 + "|", end='')
+        print(' ' * 12 + "|")
