@@ -54,11 +54,33 @@ def main():
 
     lambda1, x1 = potencia_regular(A1, v0, e)
 
-    print(lambda1, x1)
+    # print(lambda1, x1)
 
-    print("ok")
+    # print("ok")
 
-    print(matriz_x_vetor(A1, x1))
+    # print(matriz_x_vetor(A1, x1))
+    print("Matriz A1:")
+    for i in A1:
+        print(i)
+    
+    print(f"Autovalor dominante: {lambda1}")
+    print(f"Autovetor correspondente: {x1}")
+
+    print()
+
+    A2 = [[40, 8, 4, 2, 1], [8, 30, 12, 6, 2], [4, 12, 20, 1, 2], [2, 6, 1, 25, 4], [1, 2, 2, 4, 5]]
+    v0 = normalizar(np.random.rand(5))
+
+    lambda1, x1 = potencia_regular(A2, v0, e)
+
+    print("Matriz A2:")
+    for i in A2:
+        print(i)
+
+    print(f"Autovalor dominante: {lambda1}")
+    print(f"Autovetor correspondente: {x1}")
+    
+    print(matriz_x_vetor(A2, x1))
     
 
 if __name__ == "__main__":
