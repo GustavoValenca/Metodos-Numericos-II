@@ -64,17 +64,12 @@ for i in range(0, len(pontos)):
     print(f"| {pontos[i]:.3f} |   {x[i]:.8f}   |   {solucao_exata(pontos[i]):.8f}  |", end='')
     if (pontos[i] == 0.25):
         print(f"{pdf_4[0]:^22}|", end='')
-        erro = (x[i] - pdf_4[0]) / pdf_4[0]
-        print(f"{erro:^12.6f}|")
     elif (pontos[i] == 0.5):
         print(f"{pdf_4[1]:^22}|", end='')
-        erro = (x[i] - pdf_4[1]) / pdf_4[1]
-        print(f"{erro:^12.6f}|")
     elif (pontos[i] == 0.75):
         print(f"{pdf_4[2]:^22}|", end='')   
-        erro = (x[i] - pdf_4[2]) / pdf_4[2]
-        print(f"{erro:^12.6f}|")
     else:
         print(" " * 22 + "|", end='')
-        print(" " * 12 + "|")
+    erro = (x[i] - solucao_exata(pontos[i])) / solucao_exata(pontos[i])
+    print(f"{erro:^12.6f}|")
 
